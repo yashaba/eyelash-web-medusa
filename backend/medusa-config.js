@@ -21,7 +21,8 @@ import {
   MINIO_SECRET_KEY,
   MINIO_BUCKET,
   MEILISEARCH_HOST,
-  MEILISEARCH_ADMIN_KEY
+  MEILISEARCH_ADMIN_KEY,
+  BUNNY_API_KEY
 } from 'lib/constants';
 
 loadEnv(process.env.NODE_ENV, process.cwd());
@@ -47,27 +48,12 @@ const medusaConfig = {
   modules: [
     {
       key: Modules.FILE,
-      resolve: '@medusajs/file',
+      resolve: "./src/modules/bunny-file",
+      id: "bunny",
       options: {
-        providers: [
-          ...(MINIO_ENDPOINT && MINIO_ACCESS_KEY && MINIO_SECRET_KEY ? [{
-            resolve: './src/modules/minio-file',
-            id: 'minio',
-            options: {
-              endPoint: MINIO_ENDPOINT,
-              accessKey: MINIO_ACCESS_KEY,
-              secretKey: MINIO_SECRET_KEY,
-              bucket: MINIO_BUCKET // Optional, default: medusa-media
-            }
-          }] : [{
-            resolve: '@medusajs/file-local',
-            id: 'local',
-            options: {
-              upload_dir: 'static',
-              backend_url: `${BACKEND_URL}/static`
-            }
-          }])
-        ]
+        storageZoneName: "fl-beauty",
+        accessKey: BUNNY_API_KEY,
+        pullZoneUrl: "https://fl-beauty.b-cdn.net",
       }
     },
     ...(REDIS_URL ? [{
