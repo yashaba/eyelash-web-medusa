@@ -48,14 +48,41 @@ const medusaConfig = {
   modules: [
     {
       key: Modules.FILE,
-      resolve: "./src/modules/bunny-file",
-      id: "bunny",
+      resolve: '@medusajs/file',
       options: {
-        storageZoneName: "fl-beauty",
-        accessKey: BUNNY_API_KEY,
-        pullZoneUrl: "https://fl-beauty.b-cdn.net",
+        providers: [
+          ...(MINIO_ENDPOINT && MINIO_ACCESS_KEY && MINIO_SECRET_KEY ? [{
+            resolve: './src/modules/minio-file',
+            id: 'minio',
+            options: {
+              endPoint: MINIO_ENDPOINT,
+              accessKey: MINIO_ACCESS_KEY,
+              secretKey: MINIO_SECRET_KEY,
+              bucket: MINIO_BUCKET // Optional, default: medusa-media
+            }
+          },
+          {
+            resolve: "./src/modules/bunny-file",
+            id: "bunny",
+            options: {
+              storageZoneName: "fl-beauty",
+              accessKey: BUNNY_API_KEY,
+              pullZoneUrl: "https://fl-beauty.b-cdn.net",
+            }
+          },
+
+        ] : [{
+            resolve: '@medusajs/file-local',
+            id: 'local',
+            options: {
+              upload_dir: 'static',
+              backend_url: `${BACKEND_URL}/static`
+            }
+          }])
+        ]
       }
     },
+   
     ...(REDIS_URL ? [{
       key: Modules.EVENT_BUS,
       resolve: '@medusajs/event-bus-redis',
