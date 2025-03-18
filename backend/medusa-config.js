@@ -51,17 +51,7 @@ const medusaConfig = {
       resolve: '@medusajs/file',
       options: {
         providers: [
-          ...(MINIO_ENDPOINT && MINIO_ACCESS_KEY && MINIO_SECRET_KEY ? [{
-            resolve: './src/modules/minio-file',
-            id: 'minio',
-            options: {
-              endPoint: MINIO_ENDPOINT,
-              accessKey: MINIO_ACCESS_KEY,
-              secretKey: MINIO_SECRET_KEY,
-              bucket: MINIO_BUCKET // Optional, default: medusa-media
-            }
-          },
-          {
+          ...(BUNNY_API_KEY ? [ {
             resolve: "./src/modules/bunny-file",
             id: "bunny",
             options: {
@@ -69,8 +59,7 @@ const medusaConfig = {
               accessKey: BUNNY_API_KEY,
               pullZoneUrl: "https://fl-beauty.b-cdn.net",
             }
-          },
-
+          }
         ] : [{
             resolve: '@medusajs/file-local',
             id: 'local',
