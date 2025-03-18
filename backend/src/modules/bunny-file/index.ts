@@ -1,8 +1,8 @@
 import axios from "axios";
-import { IFileService } from "@medusajs/file";
-import { Readable } from "stream";
+import type { Request } from "express";
+import type multer from "multer";
 
-class BunnyFileService implements IFileService {
+class BunnyFileService {
   protected readonly storageZoneName: string;
   protected readonly accessKey: string;
   protected readonly pullZoneUrl: string;
@@ -13,40 +13,38 @@ class BunnyFileService implements IFileService {
     this.pullZoneUrl = options.pullZoneUrl;
   }
 
-  async upload(file: Express.Multer.File): Promise<{ url: string }> {
+  async upload(file: multer.File): Promise<{ url: string }> {
     const fileName = `${Date.now()}-${file.originalname}`;
     const uploadUrl = `https://storage.bunnycdn.com/${this.storageZoneName}/${fileName}`;
 
-    await axios.put(uploadUrl, file.buffer, {
-      headers: {
-        AccessKey: this.accessKey,
-        "Content-Type": file.mimetype,
-      },
-    });
+    try {
+      await axios.put(uploadUrl, file.buffer, {
+        headers: {
+          AccessKey: this.accessKey,
+          "Content-Type": file.mimetype,
+        },
+      });
 
-    return { url: `${this.pullZoneUrl}/${fileName}` };
+      return { url: `${this.pullZoneUrl}/${fileName}` };
+    } catch (error) {
+      console.error("BunnyCDN Upload Error:", error);
+      throw new Error("Failed to upload file to BunnyCDN");
+    }
   }
 
   async delete(fileKey: string): Promise<void> {
     const deleteUrl = `https://storage.bunnycdn.com/${this.storageZoneName}/${fileKey}`;
 
-    await axios.delete(deleteUrl, {
-      headers: {
-        AccessKey: this.accessKey,
-      },
-    });
-  }
-
-  async getUploadStreamDescriptor(fileData: {
-    name: string;
-    ext: string;
-    mimeType: string;
-  }): Promise<{ writeStream: Readable; url: string; fileKey: string }> {
-    throw new Error("Method not implemented.");
-  }
-
-  async getDownloadStream(fileData: { fileKey: string }): Promise<Readable> {
-    throw new Error("Method not implemented.");
+    try {
+      await axios.delete(deleteUrl, {
+        headers: {
+          AccessKey: this.accessKey,
+        },
+      });
+    } catch (error) {
+      console.error("BunnyCDN Delete Error:", error);
+      throw new Error("Failed to delete file from BunnyCDN");
+    }
   }
 }
 
