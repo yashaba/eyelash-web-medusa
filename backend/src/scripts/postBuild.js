@@ -25,8 +25,14 @@ if (fs.existsSync(envPath)) {
 }
 
 // Install dependencies
-console.log('Installing dependencies in .medusa/server...');
-execSync('pnpm i --prod --frozen-lockfile', { 
-  cwd: MEDUSA_SERVER_PATH,
-  stdio: 'inherit'
-});
+try {
+  execSync("pnpm install --prod --no-frozen-lockfile", { stdio: "inherit" })
+} catch (e) {
+  console.error("Failed to install in postBuild:", e)
+  process.exit(1)
+}
+// console.log('Installing dependencies in .medusa/server...');
+// execSync('pnpm i --prod --frozen-lockfile', { 
+//   cwd: MEDUSA_SERVER_PATH,
+//   stdio: 'inherit'
+// });
