@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "medusa-file-bunny": "^0.0.5"
+    "medusa-file-bunny": "^0.0.5",
+    "nodemailer": "^6.10.1"
   }
 }

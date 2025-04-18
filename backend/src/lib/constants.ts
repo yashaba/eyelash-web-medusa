@@ -1,6 +1,6 @@
 import { loadEnv } from '@medusajs/framework/utils'
 
-import { assertValue } from 'utils/assert-value'
+import { assertValue } from '../utils/assert-value'
 
 loadEnv(process.env.NODE_ENV || 'development', process.cwd())
 
@@ -50,10 +50,12 @@ export const STORE_CORS = assertValue(
   process.env.STORE_CORS,
   'Environment variable for STORE_CORS is not set',
 )
+
 export const IONOS_USER = assertValue(
   process.env.IONOS_USER,
   'Environment variable for STORE_CORS is not set',
 )
+
 export const IONOS_PASS = assertValue(
   process.env.IONOS_PASS,
   'Environment variable for STORE_CORS is not set',

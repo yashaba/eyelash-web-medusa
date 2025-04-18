@@ -3,7 +3,7 @@ import nodemailer from "nodemailer"
 import { EmailSubscription } from "../models/email-subscription"
 import validator from "validator"
 import rateLimit from "express-rate-limit"
-import { IONOS_PASS, IONOS_USER } from "lib/constants"
+import { IONOS_PASS, IONOS_USER } from "../lib/constants"
 
 // ✅ Setup rate limiter
 const limiter = rateLimit({
@@ -15,14 +15,14 @@ const limiter = rateLimit({
 
 // ✅ Actual route handler
 const handler = async (req: MedusaRequest, res: MedusaResponse) => {
-  const { email } = req.body
+  const { email } = req.body as { email: string }
   console.log("🚀 ~ handler ~ email:", email)
 
   if (!email || !validator.isEmail(email)) {
     return res.status(400).json({ error: "Invalid email address" })
   }
-
-  const repo = req.scope.resolve("manager").getRepository(EmailSubscription)
+  const manager = req.scope.resolve("manager") as any
+  const repo = manager.getRepository(EmailSubscription)
   const existing = await repo.findOne({ where: { email } })
 
   console.log("🚀 ~ handler ~ existing:", existing)
