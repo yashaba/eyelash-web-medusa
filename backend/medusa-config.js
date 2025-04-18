@@ -39,7 +39,8 @@ const medusaConfig = {
       storeCors: STORE_CORS,
       jwtSecret: JWT_SECRET,
       cookieSecret: COOKIE_SECRET
-    }
+    },
+    entities: ["./dist/models/*.js"]
   },
   admin: {
     backendUrl: BACKEND_URL,
