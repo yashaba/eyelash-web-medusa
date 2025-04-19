@@ -1,9 +1,9 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework"
 import nodemailer from "nodemailer"
-import { EmailSubscription } from "../models/email-subscription"
+import { EmailSubscription } from "../../models/email-subscription"
 import validator from "validator"
 import rateLimit from "express-rate-limit"
-import { IONOS_PASS, IONOS_USER } from "../lib/constants"
+import { IONOS_PASS, IONOS_USER } from "../../lib/constants"
 
 // ✅ Setup rate limiter
 const limiter = rateLimit({
