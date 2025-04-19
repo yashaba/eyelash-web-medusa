@@ -30,7 +30,7 @@ import rateLimit from "express-rate-limit"
             
             next: MedusaNextFunction
           ) => {
-            limiter(req, res, next)
+            limiter(req as any, res as any, next)
             
           },
         ],
