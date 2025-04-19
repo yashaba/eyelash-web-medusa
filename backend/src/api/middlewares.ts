@@ -4,36 +4,36 @@
 
 
 import rateLimit from "express-rate-limit"
-  import { 
+import {
     defineMiddlewares,
-    MedusaNextFunction, 
-    MedusaRequest, 
-    MedusaResponse, 
-  } from "@medusajs/framework/http"
+    MedusaNextFunction,
+    MedusaRequest,
+    MedusaResponse,
+} from "@medusajs/framework/http"
 
-  const limiter = rateLimit({
+const limiter = rateLimit({
     windowMs: 60 * 1000,
     max: 3,
     standardHeaders: true,
     legacyHeaders: false,
 })
 
-  
-  export default defineMiddlewares({
+
+export default defineMiddlewares({
     routes: [
-      {
-        matcher: "/email-subscribe",
-        middlewares: [
-          (
-            req: MedusaRequest, 
-            res: MedusaResponse, 
-            
-            next: MedusaNextFunction
-          ) => {
-            limiter(req as any, res as any, next)
-            
-          },
-        ],
-      },
+        {
+            matcher: "/email-subscribe",
+            middlewares: [
+                (
+                    req: MedusaRequest,
+                    res: MedusaResponse,
+
+                    next: MedusaNextFunction
+                ) => {
+                    limiter(req as any, res as any, next)
+
+                },
+            ],
+        },
     ],
-  })
+})

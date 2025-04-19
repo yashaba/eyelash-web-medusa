@@ -3,8 +3,17 @@ import nodemailer from "nodemailer"
 import { EmailSubscription } from "../../models/email-subscription"
 import validator from "validator"
 import { IONOS_PASS, IONOS_USER } from "../../lib/constants"
-import { EntityManager } from "@mikro-orm/core"
+import { EntityManager } from "@mikro-orm/knex"
+import { InjectManager } from "@medusajs/framework/utils"
 
+class entityManager {
+  @InjectManager()
+  async getEntityManager() {
+    const em = this.getEntityManager()
+    return em
+  }
+
+}
 export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
   const { email } = req.body as { email: string }
 
@@ -12,7 +21,7 @@ export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
     return res.status(400).json({ error: "Invalid email address" })
   }
 
-  const em = req.scope.resolve("entityManager") as EntityManager
+  const em = new entityManager().getEntityManager()
   const repo = em.getRepository(EmailSubscription)
 
   const existing = await repo.findOne({ email })
