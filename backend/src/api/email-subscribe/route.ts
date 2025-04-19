@@ -56,8 +56,6 @@ const handler = async (req: MedusaRequest, res: MedusaResponse) => {
 }
 
 // ✅ Export as array: middleware + handler
-// export const POST = [limiter, handler]
+export const POST = [limiter, handler]
 
-export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
-  res.json({ message: "Hello from email-subscribe!" })
-}
+
