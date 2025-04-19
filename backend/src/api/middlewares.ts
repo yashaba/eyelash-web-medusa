@@ -1,24 +1,39 @@
-import type {
-    MiddlewaresConfig,
-    MedusaRequest,
-    MedusaResponse,
-    MedusaNextFunction,
-  } from "@medusajs/framework"
-  import rateLimit from "express-rate-limit"
-  
+
+
+
+
+
+import rateLimit from "express-rate-limit"
+  import { 
+    defineMiddlewares,
+    MedusaNextFunction, 
+    MedusaRequest, 
+    MedusaResponse, 
+  } from "@medusajs/framework/http"
+
   const limiter = rateLimit({
     windowMs: 60 * 1000,
     max: 3,
     standardHeaders: true,
     legacyHeaders: false,
-  })
+})
+
   
-  export const config: MiddlewaresConfig = {
+  export default defineMiddlewares({
     routes: [
       {
         matcher: "/email-subscribe",
-        middlewares: [limiter],
+        middlewares: [
+          (
+            req: MedusaRequest, 
+            res: MedusaResponse, 
+            
+            next: MedusaNextFunction
+          ) => {
+            limiter(req, res, next)
+            
+          },
+        ],
       },
     ],
-  }
-  
+  })
