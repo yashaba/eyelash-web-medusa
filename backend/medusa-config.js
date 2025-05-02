@@ -1,4 +1,4 @@
-import { loadEnv, Modules, defineConfig } from '@medusajs/utils';
+import { loadEnv, Modules, defineConfig } from '@medusajs/framework/utils';
 import {
   ADMIN_CORS,
   AUTH_CORS,
@@ -36,7 +36,7 @@ const medusaConfig = {
     http: {
       adminCors: ADMIN_CORS,
       authCors: AUTH_CORS,
-      storeCors: STORE_CORS,
+      storeCors: STORE_CORS || 'http://localhost:8000',
       jwtSecret: JWT_SECRET,
       cookieSecret: COOKIE_SECRET
     },
