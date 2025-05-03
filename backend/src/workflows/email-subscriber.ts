@@ -46,6 +46,7 @@ import {
         lang,
         ip
       })
+      console.log("🚀 ~ subscription created:", subscription)
   
       return new StepResponse(subscription, subscription)
     }
@@ -58,15 +59,18 @@ import {
     "send-welcome-email",
     async (subscription: SubscriptionResult, { container }) => {
       const smtp = new SmtpService()
-  
+      console.log('attempting to send email')
+      console.log("🚀 ~ subscription:", subscription.email)
+      console.log("🚀 ~ subscription:", subscription.lang)
       try {
-        await smtp.sendMail({
+       const emailRes =  await smtp.sendMail({
           to: subscription.email,
           subject: "Welcome to Furman Luxury!",
           template: "welcome",
           lang: subscription.lang,
 
         })
+       console.log("🚀 ~ emailRes:", emailRes)
   
         return new StepResponse(true)
       } catch (err) {
