@@ -1,0 +1,38 @@
+<mjml>
+  <mj-body background-color="#f9f9f9">
+    <mj-section background-color="#ffffff" padding="24px">
+      <mj-column>
+        <mj-text font-size="20px" font-weight="bold" color="#111111">
+          Welcome to Furman Luxury 👋
+        </mj-text>
+
+        <mj-text font-size="16px" color="#333333">
+          You’ve successfully subscribed to our newsletter. Thank you for joining the Furman Luxury community.
+        </mj-text>
+
+        <mj-text font-size="16px" color="#333333">
+          We’re building something special — a premium online experience for mastering eyelash extensions, entrepreneurship, and personal transformation.
+        </mj-text>
+
+        <mj-text font-size="18px" font-weight="bold" color="#d63384">
+          Your early-bird discount code: WELCOME15
+        </mj-text>
+
+        <mj-text font-size="16px" color="#333333">
+          You’ll be the first to know when we launch — and the first to benefit.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#ffffff" padding-top="0">
+      <mj-column>
+        <mj-divider border-color="#eeeeee" />
+        <mj-text font-size="12px" color="#999999">
+          You received this email because you subscribed at
+          <a href="https://furmanluxury.com" style="color:#999999;">furmanluxury.com</a><br />
+          Furman Luxury • Tel Aviv, Israel
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
