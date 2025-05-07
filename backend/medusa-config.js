@@ -58,7 +58,7 @@ const medusaConfig = {
             options: {
               storageZoneName: "fl-beauty",
               accessKey: BUNNY_API_KEY,
-              pullZoneUrl: "https://fl-beauty.b-cdn.net",
+              pullZoneUrl: "https://cdn.furmanluxury.com",
             }
           }
         ] : [{

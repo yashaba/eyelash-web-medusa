@@ -3,7 +3,7 @@
     <mj-section background-color="#ffffff" padding="24px">
       <mj-column>
         <mj-text font-size="20px" font-weight="bold" color="#111111">
-          Welcome to Furman Luxury 👋
+          Welcome to Furman Luxury 💎
         </mj-text>
 
         <mj-text font-size="16px" color="#333333">
@@ -30,7 +30,6 @@
         <mj-text font-size="12px" color="#999999">
           You received this email because you subscribed at
           <a href="https://furmanluxury.com" style="color:#999999;">furmanluxury.com</a><br />
-          Furman Luxury • Tel Aviv, Israel
         </mj-text>
       </mj-column>
     </mj-section>
