@@ -13,9 +13,10 @@
     "medusa"
   ],
   "scripts": {
-    "build": "medusa build && medusa db:migrate",
+    "build": "medusa build && medusa db:migrate && migrate-template",
     "migrate": "medusa db:migrate",
     "seed": "medusa exec ./src/scripts/seed.ts",
+    "migrate-template": "cpx \"src/templates/**/*\" .medusa/server/src/templates",
     "ib": "init-backend",
     "start": "init-backend && cd .medusa/server && medusa start --verbose",
     "dev": "medusa develop",
@@ -39,6 +40,7 @@
     "@rokmohar/medusa-plugin-meilisearch": "1.0.3",
     "awilix": "8.0.1",
     "axios": "1.8.3",
+    "cpx": "^1.5.0",
     "express": "^4.21.2",
     "express-rate-limit": "7.5.0",
     "medusajs-launch-utils": "0.0.15",
