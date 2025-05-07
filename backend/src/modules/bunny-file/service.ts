@@ -62,8 +62,11 @@ class BunnyFileProviderService extends AbstractFileProviderService {
       const parsedFilename = path.parse(file.filename);
       const fileKey = `${parsedFilename.name}-${ulid()}${parsedFilename.ext}`;
       const uploadUrl = `https://storage.bunnycdn.com/${this.config_.storageZoneName}/${fileKey}`;
+      const content = Buffer.isBuffer(file.content)
+      ? file.content
+      : Buffer.from(file.content, 'binary') // or try 'base64' if from frontend
 
-      await axios.put(uploadUrl, file.content, {
+      await axios.put(uploadUrl, content, {
         headers: {
           AccessKey: this.config_.accessKey,
           'Content-Type': file.mimeType,
