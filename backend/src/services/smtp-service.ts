@@ -22,6 +22,8 @@ export class SmtpService {
   }
 
   async sendMail({ to, subject, template, lang = "en", params = {} }) {
+    console.log("🚀 ~ SmtpService ~ sendMail ~ lang:", lang)
+    console.log("🚀 ~ SmtpService ~ sendMail ~ template:", template)
     const templatePath = path.resolve(`src/templates/${lang}/${template}.mjml`)
     if (!fs.existsSync(templatePath)) throw new Error("Template not found")
 

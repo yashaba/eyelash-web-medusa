@@ -79,7 +79,7 @@ import {
         const emailSubscriptionService: EmailSubscriptionModuleService =
           container.resolve(EMAIL_SUBSCRIPTION_MODULE)
   
-        await emailSubscriptionService.markAsFailed(subscription.id)
+        await emailSubscriptionService.markAsFailed(subscription)
   
         return new StepResponse(false)
       }
