@@ -74,6 +74,7 @@ import {
   
         return new StepResponse(true)
       } catch (err) {
+        console.log("🚀 ~ err:", err)
         // If email fails → flag in DB
         const emailSubscriptionService: EmailSubscriptionModuleService =
           container.resolve(EMAIL_SUBSCRIPTION_MODULE)
