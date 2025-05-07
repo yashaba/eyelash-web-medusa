@@ -13,8 +13,10 @@
     "medusa"
   ],
   "scripts": {
-    "build": "medusa build && medusa db:migrate && migrate-template",
+    "build": "medusa build && medusa db:migrate && npm run migrate-template",
     "migrate": "medusa db:migrate",
+    "bla1":"bla",
+    "bla2":"bla1",
     "seed": "medusa exec ./src/scripts/seed.ts",
     "migrate-template": "cpx \"src/templates/**/*\" .medusa/server/src/templates",
     "ib": "init-backend",
